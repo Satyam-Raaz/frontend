@@ -38,7 +38,9 @@ function Booking(){
     
     useEffect(() => {
       fetchCenterlist();
-    }, []);        
+    }, []);    
+    
+    
     
 
 
@@ -69,14 +71,6 @@ function Booking(){
       ))}
 
       </select>
-    {/**<select
-        className="w-full border rounded px-3 py-2 bg-white text-gray-900"
-        value={centerName}
-        onChange={(e) => setCenterName(e.target.value)}
-      >
-        <option value="Uinque Clinic">Uinque Clinic</option>
-        <option value="laser Clinic">laser Clinic</option>
-    </select>*/}
     <select
         className="w-full border rounded px-3 py-2 bg-white text-gray-900"
         value={centerName}
@@ -84,11 +78,10 @@ function Booking(){
       >
       {list.map((center) => (
         <div key={center.id}>
-          <option  value={center.name}>
+          <option  value={center.name} >
             {center.name}
           </option>
         </div>
-
       ))}
     </select>
 

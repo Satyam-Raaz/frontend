@@ -10,6 +10,8 @@ function AllCenter(){
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const token = localStorage.getItem("token");
+    const [role,setRole]=useState(localStorage.getItem("role"));
+
     const fetchCenterlist = async () => {
         setLoading(true);
         setError("");
@@ -23,8 +25,22 @@ function AllCenter(){
         setLoading(false);
     };
 
+    const userFetchCenterlist = async () => {
+        setLoading(true);
+        setError("");
+        try {
+          const data = await apiRequest("/diagnostic/user/getAllCenter", "GET", null, token);
+          setCenterlist(data);
+          console.log(data);
+        } catch (err) {
+          setError("Failed " + err.message);
+        }
+        setLoading(false);
+    };
+
     useEffect(() => {
-        fetchCenterlist();
+        if(role==="ADMIN") fetchCenterlist();
+        else userFetchCenterlist();
     }, []);    
 
 
@@ -39,8 +55,7 @@ function AllCenter(){
                 <h3 className='font-bold text-xl mb-2'>{s.address}</h3>
                 <ul className='font-semibold text-sm list-inside list-disc'>
                   {s.tests.map((f)=>(
-                    <li key={f.id}><span className="text-green-600">{f.name}</span><span>{"--"}</span><span className="text-red-500">${f.price}</span></li>
-
+                    <li key={f.id}><span className="text-black-600">{f.name}</span><span>{"--"}</span><span className="text-green-500">₹{f.price}</span></li>
                   ))}
                 </ul>
               </div>

@@ -52,6 +52,9 @@ function UserDashboard(){
                       <button  onClick={()=>{navigate('/booking')}} className="bg-green-500 flex grow-50 justify-center rounded-lg py-3 w-35   mr-2">
                         Booking
                       </button>
+                      <button  onClick={()=>{navigate('/allCenter')}} className="bg-blue-500 flex grow-50 justify-center rounded-lg py-3 w-35   mr-2">
+                        All Center
+                      </button>
                     </div>
                 </div>
             </div>
