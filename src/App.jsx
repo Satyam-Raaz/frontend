@@ -47,7 +47,7 @@ function App() {
         <div className="container mx-auto flex justify-between items-center py-4 px-6">
           <div className="flex items-center gap-2">
             <span className='text-2xl'>🩺</span>
-            <span className='front-bold text-xl'>Diagnostic Center PlaceOrder</span>
+            <span className='front-bold text-xl'>Diagnostic Tests PlaceOrder</span>
           </div>
           <div>
             {role === "guest" ? (

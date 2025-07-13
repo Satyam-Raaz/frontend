@@ -1,4 +1,4 @@
-import {  useState,useEffect } from "react";
+import {  useState,useEffect, useRef } from "react";
 import React from "react";
 import { apiRequest } from "../api";
 
@@ -10,17 +10,35 @@ function Booking(){
     const [success, setSuccess] = useState("");
     const token=localStorage.getItem("token"); 
     const [list,setList]=useState([]);
+    const [imageUrl,setImageUrl]=useState(null);
+    const fileInputRef=useRef(null);
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
         setError("");
         setSuccess("");
         try {
-          await apiRequest(`/diagnostic/user/booking/${localStorage.getItem("id")}`, "POST", {testName,centerName}, token);          
+          await apiRequest(`/diagnostic/user/booking/${localStorage.getItem("id")}`, "POST", {testName,centerName,imageUrl}, token);          
         } catch (err) {
           setError("Failed " + err.message);
         }
-        e.preventDefault();
     };
+
+    const handleImageChange = (file) => {
+    if (file && file.type.startsWith('image/')) {
+      setImageUrl(URL.createObjectURL(file));
+      setError('');
+    } else {
+      setError('Please select a valid image file');
+    }
+  };
+
+    const handleFileInput = (e) => {
+    const file = e.target.files[0];
+    if (file) handleImageChange(file);
+  };
+
+    
 
 
     const fetchCenterlist = async () => {
@@ -50,7 +68,7 @@ function Booking(){
         <div className="container mx-auto flex justify-between items-center py-4 px-6">
           <div className="flex items-center gap-2">
             <span className='text-2xl'>🩺</span>
-            <span className='front-bold text-xl'>Diagnostic Center PlaceOrder</span>
+            <span className='front-bold text-xl'>Diagnostic Tests PlaceOrder</span>
           </div>
         </div>
       </header>
@@ -85,7 +103,12 @@ function Booking(){
       ))}
     </select>
 
-
+    <input
+      className="w-full border rounded px-3 py-2 bg-white text-gray-900"
+      type="file"
+      accept="image/*"
+      onChange={handleFileInput}
+    />
       {error && <div className="text-red-500">{error}</div>}
       {success && <div className="text-green-600">{success}</div>}
       <button

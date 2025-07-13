@@ -46,6 +46,15 @@ function AllCenter(){
 
     return(
         <>
+        <header className="bg-gradient-to-r from-blue-500 to-purple-500 text-white ">
+        <div className="container mx-auto flex justify-between items-center py-4 px-6">
+          <div className="flex items-center gap-2">
+            <span className='text-2xl'>🩺</span>
+            <span className='front-bold text-xl'>Diagnostic Tests PlaceOrder</span>
+          </div>
+        </div>
+      </header>
+
         <section className='py-16 bg-gray-100 w-full'>
           <h2 className='text-3xl font-bold text-center mb-10 '>All Centers</h2>
           <div className='flex flex-wrap justify-center gap-6 w-full'>
